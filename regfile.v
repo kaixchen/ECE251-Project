@@ -1,5 +1,6 @@
 `include "decoder.v"
 `include "register.v"
+`include "mux4t1.v"
 
 module REGFILE (
     input [1:0] Re,
@@ -15,7 +16,7 @@ module REGFILE (
     DECODE Decode (.sel(Re), .A(t0), .B(t1), .C(t2), .D(t3));
 
     assign C0 = write & t0;
-    assign C1 = write & t1;
+    assign C1 = write & t1;3
     assign C2 = write & t2;
     assign C3 = write & t3;
 
