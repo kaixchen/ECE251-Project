@@ -8,8 +8,6 @@ module MUX2t1 (
         case(sel)
             1'b0 : R = A;   // 0 -> aluIMM
             1'b1 : R = B;   // 1 -> Rs
-
-            default : R = 8'bzzzzzzzz;
         endcase
     end
 

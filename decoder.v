@@ -16,31 +16,31 @@ module DECODE (
     always @(*) begin
         case(sel)
         2'b00 : begin
-            tmp1 = 1;
-            tmp2 = 0;
-            tmp3 = 0;
-            tmp4 = 0;
+            tmp1 <= 1;
+            tmp2 <= 0;
+            tmp3 <= 0;
+            tmp4 <= 0;
         end
 
         2'b01 : begin
-            tmp1 = 0;
-            tmp2 = 1;
-            tmp3 = 0;
-            tmp4 = 0;
+            tmp1 <= 0;
+            tmp2 <= 1;
+            tmp3 <= 0;
+            tmp4 <= 0;
         end
 
         2'b10 : begin
-            tmp1 = 0;
-            tmp2 = 0;
-            tmp3 = 1;
-            tmp4 = 0;
+            tmp1 <= 0;
+            tmp2 <= 0;
+            tmp3 <= 1;
+            tmp4 <= 0;
         end
 
         2'b11 : begin
-            tmp1 = 0;
-            tmp2 = 0;
-            tmp3 = 0;
-            tmp4 = 1;
+            tmp1 <= 0;
+            tmp2 <= 0;
+            tmp3 <= 0;
+            tmp4 <= 1;
         end
 
         endcase
