@@ -29,6 +29,8 @@ module ALU8 (
             4'b0101 : R = A ^ B;      // A XORI B
             4'b0110 : R = A << B;     // A LLSI B bits
             4'b0111 : R = A >> B;     // A LRSI B bits
+
+            default : R = 8'bZZZZZZZZ;
         endcase
     end
 
