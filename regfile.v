@@ -11,13 +11,6 @@ module REGFILE (
     wire [7:0] Q0, Q1, Q2, Q3;
     wire [7:0] muxAout, muxBout;
 
-    initial begin
-        Q0 <= 8'b00000000;
-        Q1 <= 8'b00000000;
-        Q2 <= 8'b00000000;
-        Q3 <= 8'b00000000;
-    end
-
     DECODE decode (.sel(selDin), .A(t0), .B(t1), .C(t2), .D(t3));
 
     assign C0 = write & t0;

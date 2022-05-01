@@ -27,16 +27,14 @@ module ALU8 (
             4'b0011 : R = A & B;      // A ANDI B
             4'b0100 : R = A | B;      // A ORI B
             4'b0101 : R = A ^ B;      // A XORI B
-            4'b0110 : R = A << B;     // A LLSI B bits
-            4'b0111 : R = A >> B;     // A LRSI B bits
 
             default : R = 8'bZZZZZZZZ;
         endcase
     end
 
     // Flags
-    assign neg = R[7];         // Negative
-    assign zero = (R == 8'b0);  // Zero
-    assign overflow = (~A[7] && ~B[7] && flags[2]) || (A[7] && B[7] && ~flags[2]);  // Overflow
+    assign flags[2] = R[7];         // Negative
+    assign flags[1] = (R == 8'b0);  // Zero
+    assign flags[0] = (~A[7] && ~B[7] && flags[2]) || (A[7] && B[7] && ~flags[2]);  // Overflow
 
 endmodule
