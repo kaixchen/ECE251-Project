@@ -1,0 +1,136 @@
+$date
+	Sun May  1 12:41:48 2022
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module CPU $end
+$var reg 1 ! clk $end
+$upscope $end
+$scope module CPU $end
+$var wire 16 " instruc [15:0] $end
+$upscope $end
+$scope module CPU $end
+$var reg 8 # pc [7:0] $end
+$upscope $end
+$scope module CPU $end
+$var wire 4 $ opcode [3:0] $end
+$upscope $end
+$scope module CPU $end
+$var reg 1 % write $end
+$upscope $end
+$scope module CPU $end
+$var reg 1 & enbuf $end
+$upscope $end
+$scope module CPU $end
+$var wire 8 ' Q0 [7:0] $end
+$upscope $end
+$scope module CPU $end
+$var wire 8 ( Q1 [7:0] $end
+$upscope $end
+$scope module CPU $end
+$var wire 8 ) Q2 [7:0] $end
+$upscope $end
+$scope module CPU $end
+$var wire 8 * Q3 [7:0] $end
+$upscope $end
+$scope module CPU $end
+$var wire 8 + regoutA [7:0] $end
+$upscope $end
+$scope module CPU $end
+$var wire 8 , aluB [7:0] $end
+$upscope $end
+$scope module CPU $end
+$var wire 8 - data [7:0] $end
+$upscope $end
+$enddefinitions $end
+#10
+$dumpvars
+bz -
+b0 ,
+b0 +
+bz *
+bz )
+bz (
+bz '
+0&
+0%
+b0 $
+b0 #
+b1111 "
+1!
+$end
+#20
+b1010 ,
+b1010 -
+b1 $
+1&
+b1000010100000 "
+b1 #
+0!
+#21
+b10100 -
+b1010 +
+1%
+#26
+0&
+0%
+#30
+1!
+#40
+b111 -
+b111 ,
+b0 +
+1&
+b1000001110101 "
+b10 #
+0!
+#41
+b1110 -
+b111 +
+1%
+#46
+0&
+0%
+#50
+1!
+#60
+b10001 -
+b1010 +
+b1000 $
+1&
+b1000000000010010 "
+b11 #
+0!
+#61
+1%
+#66
+0&
+0%
+#70
+1!
+#80
+b0 ,
+b10001 +
+b1 $
+1&
+b1000000001010 "
+b100 #
+0!
+#81
+1%
+#86
+0&
+0%
+#90
+1!
+#100
+b1010 +
+bz -
+b0 $
+b0 "
+b101 #
+0!

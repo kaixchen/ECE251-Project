@@ -38,6 +38,9 @@ module CPU();
     MEM16 instrucMem(.A(pc), .instruc(instruc));
 
     always @(pc) begin
+        if (instruc == 16'b0000000000000000)
+    		$finish;
+
     	case(opcode[3]) 
     	    1'b1 : begin
                 enbuf = 1;
@@ -48,9 +51,7 @@ module CPU();
     		    enbuf = 0;
             end
     	    1'b0 : begin
-    		    if ((opcode == 4'b0000) && (op2 == 4'b0000))
-    			    $finish;
-    		    else if( (opcode != 4'b0000) || (opcode[2:1] != 2'b11) ) begin
+    		    if( (opcode != 4'b0000) || (opcode[2:1] != 2'b11) ) begin
                     enbuf = 1;
                     #1
                     write = 1;
@@ -74,10 +75,12 @@ module CPU();
     initial begin
         clk <= 0;
         pc <= -1;
+        enbuf <= 0;
+        write <= 0;
 
         #10;
         $dumpfile("out.vcd");
-        $dumpvars(0, clk, instruc, pc, opcode, write, enbuf, Q0, Q1, Q2, Q3);
+        $dumpvars(0, clk, instruc, pc, opcode, write, enbuf, Q0, Q1, Q2, Q3, regoutA, aluB, data);
     end
 
 endmodule
