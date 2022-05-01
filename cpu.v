@@ -1,5 +1,6 @@
 `include "alu.v"
 `include "buffer.v"
+`include "clk.v"
 `include "decoder.v"
 `include "mem.v"
 `include "memory.v"
@@ -7,6 +8,8 @@
 `include "mux4t1.v"
 `include "regfile.v"
 `include "register.v"
+
+//`timescale 1ns/1ps
 
 module CPU();
     wire [15:0] instruc;
@@ -20,7 +23,7 @@ module CPU();
     wire [2:0] flags;
     wire [7:0] regoutA, regoutB, aluB, data, databuf;
 
-    always #50 clk = ~clk;
+    wire [7:0] Q0, Q1, Q2, Q3;
 
     assign opcode = instruc[15:12];
     assign Rs2 = instruc[5:4];
@@ -59,10 +62,20 @@ module CPU();
         endcase
     end
 
-
     always @(negedge clk) begin
         pc = pc + 1;
         #10;
+    end
+
+    always #50 clk = ~clk;
+
+    initial begin
+        clk <= 0;
+        pc <= -1;
+
+        #100
+        $dumpfile("out1.vcd");
+        $dumpvars(0, clk, Q0, Q1, Q2, Q3);
     end
 
 endmodule
