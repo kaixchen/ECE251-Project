@@ -1,6 +1,5 @@
 `include "alu.v"
 `include "buffer.v"
-`include "clk.v"
 `include "decoder.v"
 `include "mem.v"
 `include "memory.v"
@@ -9,7 +8,7 @@
 `include "regfile.v"
 `include "register.v"
 
-//`timescale 1ns/1ps
+`timescale 1ns/1ns
 
 module CPU();
     wire [15:0] instruc;
@@ -31,7 +30,6 @@ module CPU();
     assign Re = instruc[1:0];
     assign op2 = instruc[3:0];
     assign const = instruc[11:4];
-    assign shamt = instruc[10:8];
 
     ALU8 alu(.op(opcode), .A(regoutA), .B(aluB), .R(data), .flags(flags));
     BUF8 buffer(.in(data), .enable(enbuf), .out(databuf));
@@ -39,12 +37,13 @@ module CPU();
     MUX2t1 immMux(.A(const), .B(regoutB), .sel(opcode[3]), .R(aluB));
     MEM16 instrucMem(.A(pc), .instruc(instruc));
 
-    always @(posedge clk) begin
+    always @(pc) begin
     	case(opcode[3]) 
     	    1'b1 : begin
                 enbuf = 1;
-                write = 1;
                 #1
+                write = 1;
+                #5
                 write = 0;
     		    enbuf = 0;
             end
@@ -53,8 +52,9 @@ module CPU();
     			    $finish;
     		    else if( (opcode != 4'b0000) || (opcode[2:1] != 2'b11) ) begin
                     enbuf = 1;
-                    write = 1;
                     #1
+                    write = 1;
+                    #5
                     write = 0;
                     enbuf = 0;
                 end
@@ -64,18 +64,20 @@ module CPU();
 
     always @(negedge clk) begin
         pc = pc + 1;
-        #10;
+        #20;
     end
 
-    always #50 clk = ~clk;
+    always begin
+        #10 clk <= ~clk;
+    end
 
     initial begin
         clk <= 0;
         pc <= -1;
 
-        #100
-        $dumpfile("out1.vcd");
-        $dumpvars(0, clk, Q0, Q1, Q2, Q3);
+        #10;
+        $dumpfile("out.vcd");
+        $dumpvars(0, clk, instruc, pc, opcode, write, enbuf, Q0, Q1, Q2, Q3);
     end
 
 endmodule

@@ -3,10 +3,10 @@ module RAM (
     input we,
     input clk,
     input oe,
-    inout [7:0] data        // inout port
+    inout [15:0] data        // inout port
 );
-    reg [7:0] ram [7:0];
-    reg [7:0] tmp_data;
+    reg [15:0] ram [0:255];
+    reg [15:0] tmp_data;
 
     always@(posedge clk) begin
         case(we)
@@ -15,6 +15,6 @@ module RAM (
         endcase
     end
 
-    assign data = oe & !we ? tmp_data : 8'bzzzzzzzz;
+    assign data = oe & !we ? tmp_data : 16'bzzzzzzzzzzzzzzzz;
     
 endmodule
