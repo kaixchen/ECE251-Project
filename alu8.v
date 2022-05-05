@@ -3,7 +3,7 @@ module ALU8 (
     input [7:0] A,      // A input
     input [7:0] B,      // B input
     output reg [7:0] R,     // Result output
-    output wire [2:0] flags  // Flags: negative/zero/overflow
+    output wire [1:0] flags  // Flags: negative/zero
 );
     always@(*) begin
         case(op)
@@ -33,8 +33,7 @@ module ALU8 (
     end
 
     // Flags
-    assign flags[2] = R[7];         // Negative
-    assign flags[1] = (R == 8'b0);  // Zero
-    assign flags[0] = (~A[7] && ~B[7] && flags[2]) || (A[7] && B[7] && ~flags[2]);  // Overflow
+    assign flags[1] = R[7];         // Negative
+    assign flags[0] = (R == 8'b0);  // Zero
 
 endmodule
