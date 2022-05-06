@@ -13,15 +13,16 @@
 
 module CPU();
     wire [15:0] instruc;
-    reg clk;
     wire [3:0] opcode, op2;
     wire [1:0] Rs1, Rs2, Re;
-    wire [7:0] const;
-    reg [7:0] pc, nextpc;
-    reg write, enbuf, enjump;
+    wire [7:0] const, memOut;
 
     wire [1:0] flagsALU, flagsStored;
-    wire [7:0] regoutA, regoutB, aluB, data, databuf;
+    wire [7:0] regoutA, regoutB, aluB, data, databuf, aluOut;
+
+    reg [7:0] pc, nextpc;
+    reg clk;
+    reg write, enbuf, enjump, memWrite, memMuxSel;
 
     wire [7:0] Q0, Q1, Q2, Q3;
 
@@ -32,13 +33,15 @@ module CPU();
     assign op2 = instruc[3:0];
     assign const = instruc[11:4];
 
-    ALU8 alu(.op(opcode), .A(regoutA), .B(aluB), .R(data), .flags(flagsALU));
+    ALU8 alu(.op(opcode), .A(regoutA), .B(aluB), .R(aluOut), .flags(flagsALU));
     BUF8 buffer(.in(data), .enable(enbuf), .out(databuf));
     REGFILE rwreg(.selDin(Re), .selAout(Rs1), .selBout(Rs2), .flagsIn(flagsALU), .write(write), .data(databuf), .regoutA(regoutA), .regoutB(regoutB), .flagsOut(flagsStored));
     MUX2t1 immMux(.A(const), .B(regoutB), .sel(opcode[3]), .R(aluB));
+    MUX2t1 memMux(.A(aluOut), .B(memOut), .sel(memMuxSel), .R(data));
     MEM16 instrucMem(.A(pc), .instruc(instruc));
+    RAM dataMem(.addr(const), .dataIn(regoutA), .we(memWrite), .clk(clk), .dataOut(memOut));
 
-    always @(*) begin
+    always @(posedge clk) begin
         #1;
         if (instruc == 16'b0000000000000000)
     		$finish;
@@ -185,7 +188,7 @@ module CPU();
 
     end
 
-    always @(negedge clk) begin
+    always @(posedge clk) begin
         if(enjump == 0) pc = pc + 1;
         if(enjump == 1) begin 
             pc = const;
@@ -205,6 +208,7 @@ module CPU();
         enbuf <= 0;
         write <= 0;
         enjump <= 0;
+        memMuxSel <= 0;
 
         #10;
         $dumpfile("out.vcd");
