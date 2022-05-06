@@ -22,7 +22,7 @@ module CPU();
 
     reg [7:0] pc, nextpc;
     reg clk;
-    reg write, enbuf, enjump, memWrite, memMuxSel;
+    reg regfileWrite, enbuf, enjump, memWrite, memMuxSel;
 
     wire [7:0] Q0, Q1, Q2, Q3;
 
@@ -35,7 +35,7 @@ module CPU();
 
     ALU8 alu(.op(opcode), .A(regoutA), .B(aluB), .R(aluOut), .flags(flagsALU));
     BUF8 buffer(.in(data), .enable(enbuf), .out(databuf));
-    REGFILE rwreg(.selDin(Re), .selAout(Rs1), .selBout(Rs2), .flagsIn(flagsALU), .write(write), .data(databuf), .regoutA(regoutA), .regoutB(regoutB), .flagsOut(flagsStored));
+    REGFILE rwreg(.selDin(Re), .selAout(Rs1), .selBout(Rs2), .flagsIn(flagsALU), .write(regfileWrite), .data(databuf), .regoutA(regoutA), .regoutB(regoutB), .flagsOut(flagsStored));
     MUX2t1 immMux(.A(const), .B(regoutB), .sel(opcode[3]), .R(aluB));
     MUX2t1 memMux(.A(aluOut), .B(memOut), .sel(memMuxSel), .R(data));
     MEM16 instrucMem(.A(pc), .instruc(instruc));
@@ -50,117 +50,127 @@ module CPU();
     	    4'b1000 : begin
                 enbuf = 1;
                 #1
-                write = 1;
+                regfileWrite = 1;
                 #1
-                write = 0;
+                regfileWrite = 0;
     		    enbuf = 0;
             end
             4'b1001 : begin
                 enbuf = 1;
                 #1
-                write = 1;
+                regfileWrite = 1;
                 #1
-                write = 0;
+                regfileWrite = 0;
     		    enbuf = 0;
             end
             4'b1010 : begin
                 enbuf = 1;
                 #1
-                write = 1;
+                regfileWrite = 1;
                 #1
-                write = 0;
+                regfileWrite = 0;
     		    enbuf = 0;
             end
             4'b1011 : begin
                 enbuf = 1;
                 #1
-                write = 1;
+                regfileWrite = 1;
                 #1
-                write = 0;
+                regfileWrite = 0;
     		    enbuf = 0;
             end
             4'b1100 : begin
                 enbuf = 1;
                 #1
-                write = 1;
+                regfileWrite = 1;
                 #1
-                write = 0;
+                regfileWrite = 0;
     		    enbuf = 0;
             end
             4'b1101 : begin
                 enbuf = 1;
                 #1
-                write = 1;
+                regfileWrite = 1;
                 #1
-                write = 0;
+                regfileWrite = 0;
     		    enbuf = 0;
             end
             4'b1110 : begin
                 enbuf = 1;
                 #1
-                write = 1;
+                regfileWrite = 1;
                 #1
-                write = 0;
+                regfileWrite = 0;
     		    enbuf = 0;
             end
             4'b1111 : begin
                 enbuf = 1;
                 #1
-                write = 1;
+                regfileWrite = 1;
                 #1
-                write = 0;
+                regfileWrite = 0;
     		    enbuf = 0;
             end
                                 // c-type
     	    4'b0001 : begin
                 enbuf = 1;
                 #1
-                write = 1;
+                regfileWrite = 1;
                 #1
-                write = 0;
+                regfileWrite = 0;
     		    enbuf = 0;
             end
             4'b0010 : begin
                 enbuf = 1;
                 #1
-                write = 1;
+                regfileWrite = 1;
                 #1
-                write = 0;
+                regfileWrite = 0;
     		    enbuf = 0;
             end
             4'b0011 : begin
                 enbuf = 1;
                 #1
-                write = 1;
+                regfileWrite = 1;
                 #1
-                write = 0;
+                regfileWrite = 0;
     		    enbuf = 0;
             end
             4'b0100 : begin
                 enbuf = 1;
                 #1
-                write = 1;
+                regfileWrite = 1;
                 #1
-                write = 0;
+                regfileWrite = 0;
     		    enbuf = 0;
             end
             4'b0101 : begin
                 enbuf = 1;
                 #1
-                write = 1;
+                regfileWrite = 1;
                 #1
-                write = 0;
+                regfileWrite = 0;
     		    enbuf = 0;
             end
                                 // memory reference
-            4'b0110 : begin     
-
+            4'b0110 : begin     // RTM
+                memWrite = 1;
+                #1
+                memWrite = 0;
             end
-            4'b0111 : begin
-
+            4'b0111 : begin     // MTR
+                memMuxSel = 1;
+                #1
+                enbuf = 1;
+                #1
+                regfileWrite = 1;
+                #1
+                regfileWrite = 0;
+    		    enbuf = 0;
+                memMuxSel = 0;
             end
                                 // branching
-            4'b0000 : begin     
+            4'b0000 : begin
                 case(op2)
                     4'b1000 : begin
                         enjump = 1;
@@ -182,7 +192,7 @@ module CPU();
 
             default : begin
                 enbuf <= 0;
-                write <= 0;
+                regfileWrite <= 0;
             end
         endcase
 
@@ -206,13 +216,13 @@ module CPU();
         clk <= 0;
         pc <= -1;
         enbuf <= 0;
-        write <= 0;
+        regfileWrite <= 0;
         enjump <= 0;
         memMuxSel <= 0;
 
         #10;
         $dumpfile("out.vcd");
-        $dumpvars(0, clk, instruc, pc, opcode, write, enbuf, enjump, regoutA, aluB, data, flagsStored);
+        $dumpvars(0, clk, instruc, pc, opcode, regfileWrite, enbuf, enjump, regoutA, aluB, data, flagsStored);
     end
 
 endmodule
