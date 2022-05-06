@@ -39,10 +39,10 @@ module CPU();
     MUX2t1 immMux(.A(const), .B(regoutB), .sel(opcode[3]), .R(aluB));
     MUX2t1 memMux(.A(aluOut), .B(memOut), .sel(memMuxSel), .R(data));
     MEM16 instrucMem(.A(pc), .instruc(instruc));
-    RAM dataMem(.addr(const), .dataIn(regoutA), .we(memWrite), .clk(clk), .dataOut(memOut));
+    RAM dataMem(.addr(const), .dataIn(regoutA), .we(memWrite), .clk(memWrite), .dataOut(memOut));
 
     always @(posedge clk) begin
-        #1;
+        #1
         if (instruc == 16'b0000000000000000)
     		$finish;
 
@@ -159,11 +159,9 @@ module CPU();
                 memWrite = 0;
             end
             4'b0111 : begin     // MTR
-                memMuxSel = 1;
-                #1
-                enbuf = 1;
-                #1
-                regfileWrite = 1;
+                memMuxSel <= 1;
+                enbuf <= 1;
+                regfileWrite <= 1;
                 #1
                 regfileWrite = 0;
     		    enbuf = 0;
@@ -219,10 +217,11 @@ module CPU();
         regfileWrite <= 0;
         enjump <= 0;
         memMuxSel <= 0;
+        memWrite <= 0;
 
         #10;
         $dumpfile("out.vcd");
-        $dumpvars(0, clk, instruc, pc, opcode, regfileWrite, enbuf, enjump, regoutA, aluB, data, flagsStored);
+        $dumpvars(0, clk, instruc, pc, opcode, regfileWrite, enbuf, enjump, regoutA, aluB, data, flagsStored, memWrite, memMuxSel);
     end
 
 endmodule
