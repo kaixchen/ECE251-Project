@@ -53,15 +53,15 @@ RTM	x2,x2,#10
 
 ------------------------------------------------------------------------------------------------------------------
 
-The 1st clock cycle there is a null operation which allows the computer to start. 
+For the 1st clock cycle there is a null operation which allows the computer to start. 
 
-Then, two **I-type** instructions are ran during the 2nd and 3rd clock cycles. This can be seen from the opcode variable where a single waveform spans for two clock cycles. From the variable regoutA, it can be seen that the immediate values 2 and 5 are added to registers X0 and X1. An additional I-Type instruction is then ran during the 4th clock cycle, subtracting 8 from an empty register, X3.
+Then, two **I-type** ADDI instructions are ran during the 2nd and 3rd clock cycles. This can be seen from the opcode variable where a single waveform spans for two clock cycles. From the variable regoutA, it can be seen that the immediate values 2 and 5 are added to registers X0 and X1. Follwoing that, An additional I-Type SUBI instruction is then ran during the 4th clock cycle, subtracting 8 from an empty register, X3.
 
-Next, a **R-Type** instruction is ran during the 5th clock cycle. This can be seen from the data variable, where the result of the add operation between X0 (2) and X1 (5) is written to X2 (7).
+Next, a **R-Type** ADD instruction is ran during the 5th clock cycle. This can be seen from the data variable, where the result of the add operation between X0 (2) and X1 (5) is written to X2 (7).
 
-Following that, an I-type memory to register instruction is ran during the 6th clock cycle in order to write over the -8 in register X3 with a 0 from memory. Then, on the 7th clock cycle, a R-Type SUB instruction is ran to set up the conditional branching that checks if the sum of 12 is greater than the 0 that was just loaded from memory. 
+Following that, an I-type memory to register (MTR) instruction is ran during the 6th clock cycle in order to write over the -8 in register X3 with a 0 from memory. Then, on the 7th clock cycle, a R-Type SUB instruction is ran to set up the conditional branching that checks if the sum of 12 is greater than the 0 that was just loaded from memory. 
 
-After that, on the 8th clock cycle, the **J-Type** branch instruction jumps the program counter to the 12th memory address and this can be seen from the waveform that forms for the enjump varible.
+After that, on the 8th clock cycle, the **J-Type** branch if great than (BGT) instruction jumps the program counter to the 12th memory address and this can be seen from the waveform that forms for the enjump varible.
 
-Lastly, on the 9th clock cycle the last I-Type instruction stores X2 (12) into memory, and you can tell the conditional branch worked because the program counter (pc) variable goes from "07", the 7th address, to "0C", the 12th address.
+Lastly, on the 9th clock cycle the last I-Type register to memor (RTM) instruction stores X2 (12) into memory, and you can tell the conditional branch worked because the program counter (pc) variable goes from "07", the 7th address, to "0C", the 12th address.
 
