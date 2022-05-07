@@ -16,9 +16,8 @@ This 8-bit computer will consist of two types of memories, the instruction memor
 
 ## Controller
 
-## ALU
-
-
+## ALU 
+The Arithmetic Logic Unit (ALU) is a combinational digital circuit in our computer that performs arithmetic operations based on the instructions ran by the computer. From the instructions, the ALU decoder will be able to recognize different operations through the information provided by the opcodes. The decoder will also be able receive information on which registers to read from and write to from the provided instructions. 
 
 ![CPU Diagram](https://user-images.githubusercontent.com/100326494/167231818-e31fc44e-cb1d-4098-b2cf-cd4210ad092f.jpg)
 
