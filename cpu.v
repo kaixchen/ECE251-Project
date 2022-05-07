@@ -111,7 +111,7 @@ module CPU();
                 regfileWrite = 0;
     		    enbuf = 0;
             end
-                                // c-type
+                                // i-type
     	    4'b0001 : begin
                 enbuf = 1;
                 #1
