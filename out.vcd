@@ -1,5 +1,5 @@
 $date
-	Fri May  6 15:15:05 2022
+	Fri May  6 21:02:22 2022
 $end
 $version
 	Icarus Verilog
@@ -20,44 +20,52 @@ $scope module CPU $end
 $var wire 4 $ opcode [3:0] $end
 $upscope $end
 $scope module CPU $end
-$var reg 1 % regfileWrite $end
+$var wire 4 % op2 [3:0] $end
 $upscope $end
 $scope module CPU $end
-$var reg 1 & enbuf $end
+$var reg 1 & regfileWrite $end
 $upscope $end
 $scope module CPU $end
-$var reg 1 ' enjump $end
+$var reg 1 ' enbuf $end
 $upscope $end
 $scope module CPU $end
-$var wire 8 ( regoutA [7:0] $end
+$var reg 1 ( enjump $end
 $upscope $end
 $scope module CPU $end
-$var wire 8 ) aluB [7:0] $end
+$var wire 8 ) regoutA [7:0] $end
 $upscope $end
 $scope module CPU $end
-$var wire 8 * data [7:0] $end
+$var wire 8 * aluB [7:0] $end
 $upscope $end
 $scope module CPU $end
-$var wire 2 + flagsStored [1:0] $end
+$var wire 8 + data [7:0] $end
 $upscope $end
 $scope module CPU $end
-$var reg 1 , memWrite $end
+$var wire 8 , databuf [7:0] $end
 $upscope $end
 $scope module CPU $end
-$var reg 1 - memMuxSel $end
+$var wire 2 - flagsStored [1:0] $end
+$upscope $end
+$scope module CPU $end
+$var reg 1 . memWrite $end
+$upscope $end
+$scope module CPU $end
+$var reg 1 / memMuxSel $end
 $upscope $end
 $enddefinitions $end
 #10
 $dumpvars
-0-
-0,
-b0 +
-bz *
+0/
+0.
+b0 -
+bz ,
+bz +
+b0 *
 b0 )
-b0 (
+0(
 0'
 0&
-0%
+b1111 %
 b0 $
 b0 #
 b1111 "
@@ -66,79 +74,173 @@ $end
 #20
 0!
 #30
-b1 *
-b1 )
+b10 +
+b10 *
+b0 %
 b1 $
-b1000000010000 "
+b1000000100000 "
 b1 #
 1!
 #31
-1&
+b10 ,
+1'
 #32
-b10 *
-b1 (
-1%
+b100 ,
+b100 +
+b10 )
+1&
 #33
+bz ,
+0'
 0&
-0%
 #40
 0!
 #50
-bz *
+b101 +
+b101 *
 b0 )
-b110 $
-b110000000000000 "
+b101 %
+b1000001010101 "
 b10 #
 1!
 #51
-1,
+b101 ,
+1'
 #52
-0,
+b1010 ,
+b1010 +
+b101 )
+1&
+#53
+bz ,
+0'
+0&
 #60
 0!
 #70
-b111 $
-b111000000000011 "
+b11111000 +
+b1000 *
+b0 )
+b1111 %
+b10 $
+b10000010001111 "
 b11 #
 1!
 #71
-bzx +
-b1 *
-1%
-1&
-1-
+b11111000 ,
+1'
 #72
-bz *
-0-
+b11110000 ,
+b11110000 +
+b11111000 )
+b10 -
+1&
+#73
+bz ,
+0'
 0&
-0%
 #80
 0!
 #90
-b10 *
-b1 )
-b1 $
-b1000000011111 "
+b111 +
+b101 *
+b10 )
+b10 %
+b1000 $
+b1000111111010010 "
 b100 #
 1!
 #91
-1&
+b111 ,
+1'
 #92
-b11 *
-b10 (
-b0 +
-1%
+b0 -
+1&
 #93
+bz ,
+0'
 0&
-0%
 #100
 0!
 #110
-bz *
-b0 )
-b1 (
-b0 $
-b0 "
+bz +
+b0 *
+b11 %
+b111 $
+b111000000000011 "
 b101 #
 1!
 #111
+b0 +
+1/
+#112
+b0 ,
+1'
+#113
+bzx -
+1&
+#114
+bz +
+bz ,
+0/
+0'
+0&
+#120
+0!
+#130
+b111 +
+b111 )
+b1010 %
+b1001 $
+b1001111111111010 "
+b110 #
+1!
+#131
+b111 ,
+1'
+#132
+b0 -
+1&
+#133
+bz ,
+0'
+0&
+#140
+0!
+#150
+bz +
+b1100 *
+b101 )
+b111 %
+b0 $
+b11000111 "
+b111 #
+1!
+#151
+1(
+#160
+0!
+#170
+b1010 *
+b111 )
+b1010 %
+b110 $
+0(
+b110000010101010 "
+b1100 #
+1!
+#171
+1.
+#172
+0.
+#180
+0!
+#190
+b0 *
+b10 )
+b0 %
+b0 $
+b0 "
+b1101 #
+1!
+#191

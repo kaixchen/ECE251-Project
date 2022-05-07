@@ -4,7 +4,7 @@ module MEM16 (
 );
     reg [15:0] ram [0:255];
 
-    initial $readmemb("test.txt", ram, 0);
+    initial $readmemb("instruc.txt", ram, 0);
 
     assign instruc = ram[A];
     

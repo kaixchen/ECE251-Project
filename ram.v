@@ -1,3 +1,5 @@
+// partially referenced from: https://www.intel.com/content/www/us/en/programmable/quartushelp/13.0/mergedProjects/hdl/vlog/vlog_pro_ram_inferred.htm
+
 module RAM (
     input [7:0] addr,
     input [7:0] dataIn,

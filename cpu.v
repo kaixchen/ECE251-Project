@@ -20,7 +20,7 @@ module CPU();
     wire [1:0] flagsALU, flagsStored;
     wire [7:0] regoutA, regoutB, aluB, data, databuf, aluOut;
 
-    reg [7:0] pc, nextpc;
+    reg [7:0] pc;
     reg clk;
     reg regfileWrite, enbuf, enjump, memWrite, memMuxSel;
 
@@ -160,7 +160,9 @@ module CPU();
             end
             4'b0111 : begin     // MTR
                 memMuxSel <= 1;
+                #1
                 enbuf <= 1;
+                #1
                 regfileWrite <= 1;
                 #1
                 regfileWrite = 0;
@@ -221,7 +223,7 @@ module CPU();
 
         #10;
         $dumpfile("out.vcd");
-        $dumpvars(0, clk, instruc, pc, opcode, regfileWrite, enbuf, enjump, regoutA, aluB, data, flagsStored, memWrite, memMuxSel);
+        $dumpvars(0, clk, instruc, pc, opcode, op2, regfileWrite, enbuf, enjump, regoutA, aluB, data, databuf, flagsStored, memWrite, memMuxSel);
     end
 
 endmodule
