@@ -55,7 +55,7 @@ RTM	x2,x2,#10
 
 The 1st clock cycle there is a null operation which allows the computer to start. 
 
-Then, two **I-type** instructions are ran during the 2nd and 3rd clock cycles. This can be seen from the opcode varible where the single waveform spans for two clock cycles. From the variable regoutA, it can be seen that the immediate values 2 and 5 are added to registers X0 and X1. An additional I-Type instruction is then ran during the 4th clock cycle, subtracting 8 from an empty register, X3.
+Then, two **I-type** instructions are ran during the 2nd and 3rd clock cycles. This can be seen from the opcode variable where the single waveform spans for two clock cycles. From the variable regoutA, it can be seen that the immediate values 2 and 5 are added to registers X0 and X1. An additional I-Type instruction is then ran during the 4th clock cycle, subtracting 8 from an empty register, X3.
 
 Next, a **R-Type** instruction is ran during the 5th clock cycle. This can be seen from the data variable, where the result of the add operation between X0 (2) and X1 (5) is written to X2 (7).
 
