@@ -21,4 +21,5 @@ This 8-bit computer will consist of two types of memories, the instruction memor
 
 
 ![CPU Diagram](https://user-images.githubusercontent.com/100326494/167231818-e31fc44e-cb1d-4098-b2cf-cd4210ad092f.jpg)
+
 ![GTKwave](https://user-images.githubusercontent.com/100326494/167231974-8d3d9ad5-fa30-48c4-8d5c-f4775b8b93b5.png)
