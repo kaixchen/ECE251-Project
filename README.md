@@ -1,4 +1,4 @@
-# Kai Chen & Edward Chen ECE251-Project
+# Kai Xian Chen & Edward Chen ECE251-Project
 
 ## Instuction Set Architecture
 The Instuction Set Architecture (ISA) for this 8-bit computer will consist of 8-bit constants, hence the name 8-bit CPU, and 16-bit instructions. This computer will be able to run three different types of intructions: R-Type (register), I-Type (immediate), and J-Type (jump). Starting from the left most significant bit, the first 4-bits of the instruction will be set as the operation code (opcode) and will define the operation being performed by the instruction. Within the opcodes, a distinction is made for the R-Type instructions by labeling the first bit of the opcode as 1. This distiction leaves 0 as the first bit for both the I and J-Type instructions. Therefore, to separate these two instructions, a second set of opcodes are defined for the J-Type instructions, allowing for its first set of opcodes to be all 0's. As a result, even if the first bit of the opcode is 0, unless the first 4-bits of the opcode are all 0's, the operation will be an I-Type instruction.
