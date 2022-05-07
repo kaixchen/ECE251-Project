@@ -41,17 +41,17 @@ Edward Chen (50%)
 
 ## Timing Diagrams
 ### R-Type Instruction example
-Kai Xian Chen (100%)
+Kai Xian Chen (90%)
 
-Edward Chen (0%)
+Edward Chen (10%)
 ### I-Type Instruciton example
-Kai Xian Chen (100%)
+Kai Xian Chen (90%)
 
-Edward Chen (0%)
+Edward Chen (10%)
 ### J-Type Instruction example
-Kai Xian Chen (100%)
+Kai Xian Chen (90%)
 
-Edward Chen (0%)
+Edward Chen (10%)
 
 ## Assembler
 Kai Xian Chen (50%)
