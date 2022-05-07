@@ -14,7 +14,7 @@ module REGFILE (
     wire [1:0] Q4;
     wire [7:0] muxAout, muxBout;
 
-    DECODE decode (.sel(selDin), .A(t0), .B(t1), .C(t2), .D(t3));
+    DEMUX4t1 demux(.sel(selDin), .A(t0), .B(t1), .C(t2), .D(t3));
 
     assign C0 = write && t0;
     assign C1 = write && t1;
@@ -23,15 +23,15 @@ module REGFILE (
 
     assign C4 = write;
 
-    REG8 X0 (.D(data), .Q(Q0), .clkR(C0));
-    REG8 X1 (.D(data), .Q(Q1), .clkR(C1));
-    REG8 X2 (.D(data), .Q(Q2), .clkR(C2));
-    REG8 X3 (.D(data), .Q(Q3), .clkR(C3));
+    REG8 X0(.D(data), .Q(Q0), .clkR(C0));
+    REG8 X1(.D(data), .Q(Q1), .clkR(C1));
+    REG8 X2(.D(data), .Q(Q2), .clkR(C2));
+    REG8 X3(.D(data), .Q(Q3), .clkR(C3));
 
-    REG2 X4 (.D(flagsIn), .Q(Q4), .clkR(C4));
+    REG2 X4(.D(flagsIn), .Q(Q4), .clkR(C4));
 
-    MUX4t1 muxA (.A(Q0), .B(Q1), .C(Q2), .D(Q3), .sel(selAout), .R(muxAout));
-    MUX4t1 muxB (.A(Q0), .B(Q1), .C(Q2), .D(Q3), .sel(selBout), .R(muxBout));
+    MUX4t1 muxA(.A(Q0), .B(Q1), .C(Q2), .D(Q3), .sel(selAout), .R(muxAout));
+    MUX4t1 muxB(.A(Q0), .B(Q1), .C(Q2), .D(Q3), .sel(selBout), .R(muxBout));
 
     assign regoutA = muxAout;
     assign regoutB = muxBout;

@@ -1,4 +1,4 @@
-module DECODE (
+module DEMUX4t1 (
     input [1:0] sel,
     output reg A,
     output reg B,

@@ -1,6 +1,6 @@
 `include "alu8.v"
 `include "buffer8.v"
-`include "decoder.v"
+`include "demux4t1.v"
 `include "mem16.v"
 `include "mux2t1.v"
 `include "mux4t1.v"
