@@ -63,5 +63,5 @@ Following that, an I-type memory to register instruction is ran during the 6th c
 
 After that, on the 8th clock cycle, the **J-Type** branch instruction jumps the program counter to the 12th memory address and this can be seen from the waveform that forms for the enjump varible.
 
-Lastly, on the 9th clock cycle the last I-Type instruction stores X2 (12) into memory, and you can tell the conditional branch worked because the program counter (pc) variable goes from "07", the 7th address, to "0c", the 12th address.
+Lastly, on the 9th clock cycle the last I-Type instruction stores X2 (12) into memory, and you can tell the conditional branch worked because the program counter (pc) variable goes from "07", the 7th address, to "0C", the 12th address.
 
