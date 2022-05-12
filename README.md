@@ -33,18 +33,17 @@ The Arithmetic Logic Unit (ALU) is a combinational digital circuit in our comput
 ## Timing Diagram (GTKWave)
 Instructions ran for timing diagram
 ```
-(address 0)
-NULL
-ADDI	x0,x0,#2
-ADDI	x1,x1,#5
-SUBI	x3,x3,#8
-ADD	x2,x0,x1
-MTR	x3,x3,#0
-SUB	x2,x2,x3
-BGT	#12
-...
-(address 12) 
-RTM	x2,x2,#10
+Assembly            Binary
+NULL                0000000000001111  (address 0)
+ADDI	x0,x0,#2    0001000000100000
+ADDI	x1,x1,#5    0001000001010101
+SUBI	x3,x3,#8    0010000010001111
+ADD	x2,x0,x1    1000111111010010
+MTR	x3,x3,#0    0111000000000011
+SUB	x2,x2,x3    1001111111111010
+BGT	#12         0000000011000111
+...                 0000000000000000  (addresses 8-11)
+RTM	x2,x2,#10   0110000010101010  (address 12)
 ```
 ------------------------------------------------------------------------------------------------------------------
 <p align="center">
