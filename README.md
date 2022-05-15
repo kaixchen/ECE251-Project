@@ -20,15 +20,17 @@ The Controller consists of one of the most important functions in a computer; na
 The Arithmetic Logic Unit (ALU) is a combinational digital circuit in our computer that performs arithmetic/logic operations based on the instructions ran by the computer. After the ALU receives the contents from the registers through the controller, the ALU decoder will be able to recognize different operations to perform through the opcodes from the instructions.
 
 ## Architecture Diagram
-![CPU - CPU](https://user-images.githubusercontent.com/100326494/167237060-e5c02c45-750b-4342-9e7d-6d8861255e91.jpg)
+![CPU - CPU](https://user-images.githubusercontent.com/100326494/168493699-6ffb9ec1-86c1-43c4-9e1e-199ebb7211b7.jpg)
 ### R-Type
-![CPU - R-Type](https://user-images.githubusercontent.com/100326494/167237064-f6f696aa-a6c9-4346-84a4-02496ebce2ea.jpg)
+![R-Type](https://user-images.githubusercontent.com/100326494/168494389-e0894666-74fb-4cdb-8c1b-708c4a8f6d12.gif)
 ### I-Type Immediate
-![CPU - I-Type](https://user-images.githubusercontent.com/100326494/167237066-5bc5dc01-9251-499b-87dc-96a95649c7a2.jpg)
-### I-Type Memory Reference
-![CPU - I-Type RTM_MTR](https://user-images.githubusercontent.com/100326494/167237067-2fba4e55-b14d-4a34-8e44-e6a81feb1381.jpg)
+![I-Type](https://user-images.githubusercontent.com/100326494/168496319-234483b1-e98a-4507-8bf9-5b7d6f8c6589.gif)
+### I-Type Register To Memory
+![I-TypeRTM](https://user-images.githubusercontent.com/100326494/168496331-d8a3ea75-2356-433e-9923-d2b0bb73c146.gif)
+### I-Type Memory To Register
+![I-TypeMTR](https://user-images.githubusercontent.com/100326494/168496338-913f53be-d877-49a4-9544-3e7a7bc558ad.gif)
 ### J-Type
-![CPU - J-Type](https://user-images.githubusercontent.com/100326494/167237070-54164cd5-0aac-49be-870e-dee456bcae61.jpg)
+![J-Type](https://user-images.githubusercontent.com/100326494/168496397-bbb41a00-84d3-4b95-8b96-01a98e22320c.gif)
 
 ## Timing Diagram (GTKWave)
 Instructions ran for timing diagram
